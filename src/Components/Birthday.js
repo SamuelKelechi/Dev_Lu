@@ -9,6 +9,14 @@ import FacebookIcon from '@mui/icons-material/Facebook';
 import WhatsAppIcon from '@mui/icons-material/WhatsApp';
 import GitHubIcon from '@mui/icons-material/GitHub';
 import TwitterIcon from '@mui/icons-material/Twitter';
+import LinkedInIcon from '@mui/icons-material/LinkedIn';
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import Ayomi from './Image/ayomi8.jpg';
+import TouchAppIcon from '@mui/icons-material/TouchApp';
+import Back from './Image/birthday2.jpg';
+import Ayomi1 from './Image/ayomi1.jpg'
+
+
 
 const Birthday = () => {
     const [toggle, setToggle] = useState(true);
@@ -106,16 +114,17 @@ const Birthday = () => {
     <MainContainer>
         <Container>
             <HeroHold>
-                <Avat />
+                <Avat src={Ayomi1}/>
                 <Name>Anozie Luciana</Name>
                 <BirthDate>On Sunday, 01 May</BirthDate>
             </HeroHold>
             <DownHold>
                 {toggle ? (
                     <>
-                        <button onClick={Switch}>Support My Dream</button>
+                        <button onClick={Switch} style={{width:'50%', height:'45px'}}> Support My Dream</button>
+                        <TouchAppIcon/>
                         <InputHold>
-                            <div>Send me a special Birthday Message</div>
+                            <marquee>Send me a Special Birthday Message</marquee>
                             <span><label>Select Your Image</label><input accept='image/*' onChange={(e)=>handleImageChange(e)} style={{width: '100px'}} type='file'/></span> 
                             <input name='name' value={formData.name}  onChange={(e)=>handleChange(e)} placeholder='Please, Input Your Name'/>
                             <textarea name='message' value={formData.message}  onChange={(e)=>handleChange(e)} placeholder='Write me a Birthday Wish'/>
@@ -124,7 +133,7 @@ const Birthday = () => {
                                     {`Message Sending... ${progress}%`}
                                 </div>
                             )}
-                            <button style={{width:'50%'}} onClick={()=>{
+                            <button  onClick={()=>{
                                 Post();
                             }}>Send Message</button>
                         </InputHold>
@@ -136,22 +145,23 @@ const Birthday = () => {
                         <CardHolder>
                            {wish.map((props) => (
                                 <Cards key={props.id}>
-                                <Avatar src={props.image}/>
-                                <Contents>
-                                    
-                                    <MessageName style={{textAlign:'left', marginBottom:'-12px', marginLeft:'-1px'}}>{props.name} <p style={{color:'#DF4C67', textAlign:'left', fontSize:'13px',  textTransform:"capitalize"}}>{moment(props.createdAt.toDate()).fromNow()}</p></MessageName>
-                                    <p style={{textAlign:'left', fontSize:'14px', fontWeight: 'lighter'}}>{props.message}</p>
-                                </Contents>
-                                {/* <p style={{width:'20px', backgroundColor:'red'}}>o</p> */}
-                        </Cards>
+                                    <Avatar src={props.image}/>
+                                    <Contents>
+                                        
+                                        <MessageName style={{textAlign:'left', marginBottom:'-5px', marginLeft:'-1px'}}>{props.name} <p style={{marginBottom:'-3px',textAlign:'left', fontSize:'13px',  textTransform:"capitalize"}}> {moment(props.createdAt.toDate()).fromNow()}</p></MessageName>
+                                        <p style={{textAlign:'left', fontSize:'14px', fontWeight: 'lighter'}}>{props.message}</p>
+                                    </Contents>
+                                    <p style={{width:'15px'}}><FavoriteIcon/></p>
+                                </Cards>
                            ))}
                         </CardHolder>
                         </>
                         ):(
                         <>
-                        <div onClick={Switch2} style={{marginBottom:'-5px', cursor:'pointer', marginTop:'10px', border:'1px solid white', padding:'5px', borderRadius:'5px'}}>BIRTHDAY MESSAGES</div>
-                        <FlipHolder>
-                        </FlipHolder>
+                        <div onClick={Switch2} style={{cursor:'pointer', marginTop:'10px', border:'1px solid white', padding:'5px', borderRadius:'5px'}}>BIRTHDAY MESSAGES</div>
+                     
+                            <FlipHolder >  
+                            </FlipHolder>
                         </>
                         )
 
@@ -170,11 +180,12 @@ const Birthday = () => {
                 }
 
                 <Connect>
-                    <h3>Connect with</h3>
+                    <h3 style={{color:'white'}}>Connect with</h3>
                     <span>
                     <FacebookIcon />
                     <WhatsAppIcon />
                     <GitHubIcon />
+                    <LinkedInIcon />
                     <TwitterIcon />
                     </span>
                 </Connect>
@@ -213,13 +224,15 @@ const Container = styled.div`
     }
 
     @media screen and (max-width: 650px){
-        width: 90%;
+        width: 95%;
     }
 `
 const HeroHold = styled.div`
     height: 300px;
     width: 95%;
-    background-color: #EB5646;
+    background: url(${Back});
+    background-size: cover;
+    background-position: center;
     margin-top: 20px;
     border-radius: 40px 40px 0 0;
     display: flex;
@@ -243,22 +256,40 @@ const Avat = styled.img`
     object-position: center;
     margin-top: 15px;
 
+    :hover{
+        width: 160px; 
+        height: 160px;
+        margin-top: 30px;
+        transition: all 0.9s ease-in-out;
+    }
+
     @media screen and (max-width: 650px){
         width: 150px;
         height: 150px;
     }
+
 `
 
 const Name = styled.div`
     font-size: 22px;
     font-weight: bold;
+    color: white;
+    background-color: #252559;
+    width: 180px;
+    text-align: center;
+    border-radius: 4px;
 
     @media screen and (max-width: 650px){
     font-size: 18px;
     }
 `
 
-const BirthDate = styled.div``
+const BirthDate = styled.div`
+    width: 130px;
+    text-align: center;
+    color: white;
+    background-color: #252559;
+`
 
 const DownHold = styled.div`
     width: 95%;
@@ -339,6 +370,7 @@ const InputHold = styled.div`
         padding-top: 20px;
         font-size: 20px;
         width: 90%;
+        color: black;
     }
 
     @media screen and (max-width: 650px){
@@ -354,18 +386,24 @@ const CardHolder = styled.div`
     padding: 5px;
 
     @media screen and (max-width: 650px){
-        width: 90%;
+        width: 98%;
     }
 `
 
 const FlipHolder = styled.div`
     display: flex;
     justify-content: center;
+    background-image: url(${Ayomi});
+    background-position: center;
+    background-size: cover;
+    border-radius: 8px;
     width: 80%;
-    height: 400px;
+    height: 500px;
+    overflow: hidden;
 
     @media screen and (max-width: 650px){
         width: 90%;
+        height: 400px;
     }
 `
 
@@ -388,6 +426,7 @@ const Connect= styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
+    color: white;
 
     span{
         width: 100%;
@@ -404,6 +443,7 @@ const Avatar = styled.img`
 
     @media screen and (max-width: 650px){
         height: 80px;
+        width: 20%;
         border-radius: 8px;
     }
 `

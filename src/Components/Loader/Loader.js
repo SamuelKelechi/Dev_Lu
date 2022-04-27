@@ -1,6 +1,7 @@
-import React from 'react'
-import styled from 'styled-components'
+import React from 'react';
+import styled from 'styled-components';
 import ReactLoading from 'react-loading';
+import Ayomi from '../Image/ayomi9.jpg'
 
 const Loader = ({ type, color }) => (
     <>
@@ -20,8 +21,7 @@ export default Loader;
 
 const Main = styled.div`
     width: 100%;
-    height: auto;
-    min-height: 100vh;
+    height: 100vh;
     display: flex;
     justify-content:center;
     background-color: #252559;
@@ -53,9 +53,13 @@ const Contain = styled.div`
     }
 `
 const Hero = styled.div`
-    height: 400px;
+    height: 450px;
+    /* margin-top: 20px; */
     width: 90%;
-    background-color: white;
+    background: url(${Ayomi});
+    background-position: center;
+    background-size: cover;
+    /* background-repeat: no-repeat; */
     border-radius: 0 0 20px 20px;
 
     @media screen and (max-width: 650px){  

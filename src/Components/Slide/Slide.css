@@ -1,0 +1,20 @@
+.Slide1{
+    height: 500px;
+    color: #fff;
+    width: 100%;
+    background: url(../Image/ayomi9.jpg);
+    background-position: center;
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.Slide2{
+    height: 500px;
+    width: 100%;
+    color: #fff;    
+    background: url(../Image/ayomi9.jpg);
+    background-position: center;
+    background-size: cover;
+}
