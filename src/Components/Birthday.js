@@ -1,13 +1,19 @@
-import React,{useState} from 'react';
+import React,{useState, useEffect} from 'react';
 import styled from 'styled-components';
-import { addDoc, collection, Timestamp} from 'firebase/firestore';
+import { addDoc, collection, Timestamp, query, orderBy, onSnapshot, getDocs} from 'firebase/firestore';
 import {getDownloadURL, ref, uploadBytesResumable} from 'firebase/storage';
 import { storage, db } from '../Base';
 import { toast } from 'react-toastify';
+import moment from 'moment';
+import FacebookIcon from '@mui/icons-material/Facebook';
+import WhatsAppIcon from '@mui/icons-material/WhatsApp';
+import GitHubIcon from '@mui/icons-material/GitHub';
+import TwitterIcon from '@mui/icons-material/Twitter';
 
 const Birthday = () => {
     const [toggle, setToggle] = useState(true);
     const [toggle1, setToggle1] = useState(false);
+    const [wish, setWish] = useState([]);
 
     const [formData, setFormData] = useState({
         name: "",
@@ -75,6 +81,26 @@ const Birthday = () => {
         );
     };
 
+
+    const usersCollectionRef = collection(db, "message")
+
+    const que = query(usersCollectionRef, orderBy("createdAt", "desc"))
+
+    const getData =  () => {
+        onSnapshot(que, (snapshot) => {
+            const datas = snapshot.docs.map((doc) => ({
+                id: doc.id,
+                ...doc.data(),
+            }));
+            setWish(datas);
+        });
+    };
+
+
+    useEffect(() => {
+        getData();
+    }, []);
+
   return (
     <>
     <MainContainer>
@@ -108,22 +134,23 @@ const Birthday = () => {
                         <div onClick={Switch2} style={{marginBottom:'-5px', cursor:'pointer', marginTop:'10px', border:'1px solid white', padding:'5px', borderRadius:'5px'}}>BACK TO GALLERY</div>
                         
                         <CardHolder>
-                            <Cards>
-                                    <Avatar />
-                                    <Contents>
-                                        
-                                        <MessageName style={{textAlign:'left', marginBottom:'-12px', marginLeft:'-1px'}}>Samuel Kelechi <p style={{color:'#DF4C67', textAlign:'left', fontSize:'13px',  textTransform:"capitalize"}}>5 minutes ago</p></MessageName>
-                                        <p style={{textAlign:'left', fontSize:'14px', fontWeight: 'lighter'}}>Happy Birthday Lulu</p>
-                                    </Contents>
-                                    {/* <p style={{width:'20px', backgroundColor:'red'}}>o</p> */}
-                            </Cards>
+                           {wish.map((props) => (
+                                <Cards key={props.id}>
+                                <Avatar src={props.image}/>
+                                <Contents>
+                                    
+                                    <MessageName style={{textAlign:'left', marginBottom:'-12px', marginLeft:'-1px'}}>{props.name} <p style={{color:'#DF4C67', textAlign:'left', fontSize:'13px',  textTransform:"capitalize"}}>{moment(props.createdAt.toDate()).fromNow()}</p></MessageName>
+                                    <p style={{textAlign:'left', fontSize:'14px', fontWeight: 'lighter'}}>{props.message}</p>
+                                </Contents>
+                                {/* <p style={{width:'20px', backgroundColor:'red'}}>o</p> */}
+                        </Cards>
+                           ))}
                         </CardHolder>
                         </>
                         ):(
                         <>
                         <div onClick={Switch2} style={{marginBottom:'-5px', cursor:'pointer', marginTop:'10px', border:'1px solid white', padding:'5px', borderRadius:'5px'}}>BIRTHDAY MESSAGES</div>
                         <FlipHolder>
-                        
                         </FlipHolder>
                         </>
                         )
@@ -145,7 +172,10 @@ const Birthday = () => {
                 <Connect>
                     <h3>Connect with</h3>
                     <span>
-
+                    <FacebookIcon />
+                    <WhatsAppIcon />
+                    <GitHubIcon />
+                    <TwitterIcon />
                     </span>
                 </Connect>
               
@@ -343,7 +373,7 @@ const Cards = styled.div`
     width: 100%;
     height: auto;
     min-height: 100px;
-    margin-top: 10px;
+    margin-top: 15px;
     background-color: #4D459B;
     padding:8px;
     display: flex;
@@ -354,19 +384,17 @@ const Cards = styled.div`
     box-shadow: 1px 4px 4px 4px rgba(225, 225, 225, 0.3);
 `
 const Connect= styled.div`
-    width: 50%;
+    width: 200px;
     display: flex;
-    justify-content: center;
-    bottom: 0;
+    flex-direction: column;
+    align-items: center;
 
-
-    @media screen and (max-width: 1025px){
-        width: 70%;
+    span{
+        width: 100%;
+        display: flex;
+        justify-content: space-around;
     }
 
-    @media screen and (max-width: 650px){
-        width: 90%;
-    }
 `
 const Avatar = styled.img`
     width: 22%;
