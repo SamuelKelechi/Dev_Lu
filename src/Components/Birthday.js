@@ -13,9 +13,10 @@ import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import TouchAppIcon from '@mui/icons-material/TouchApp';
-import Ayomi from './Image/ayomi8.jpg';
 import Back from './Image/birthday2.jpg';
 import Ayomi1 from './Image/ayomi1.jpg'
+import Flip from './Slide/Flip';
+
 
 
 
@@ -168,6 +169,7 @@ const Birthday = () => {
                         <div onClick={Switch2} style={{cursor:'pointer', marginTop:'10px', border:'1px solid white', padding:'5px', borderRadius:'5px'}}>BIRTHDAY MESSAGES</div>
                      
                             <FlipHolder >  
+                                <Flip />
                             </FlipHolder>
                         </>
                         )
@@ -258,7 +260,8 @@ const Container = styled.div`
 const HeroHold = styled.div`
     height: 300px;
     width: 95%;
-    background: url(${Back});
+    background: url(https://img.freepik.com/free-vector/realistic-happy-birthday-black-golden_1361-3241.jpg?t=st=1651151892~exp=1651152492~hmac=62b949cc0fb3e1df3e8ff8a946f21c871b5d111186e9aeaaf0d13114c13bc131&w=740);
+    /* background: url(https://img.freepik.com/free-vector/realistic-birthday-background_52683-42214.jpg?w=2000); */
     background-size: cover;
     background-position: center;
     margin-top: 20px;
@@ -278,7 +281,7 @@ const Avat = styled.img`
     width: 200px;
     height: 200px;
     border-radius: 100%;
-    border: 2px solid white;
+    border: 3px solid white;
     background-color: whitesmoke;
     object-fit: cover;
     object-position: center;
@@ -455,18 +458,17 @@ const CardHolder = styled.div`
 `
 
 const FlipHolder = styled.div`
-    display: flex;
-    justify-content: center;
-    background-image: url(${Ayomi});
-    background-position: center;
-    background-size: cover;
     border-radius: 8px;
     width: 80%;
     height: 500px;
     overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: red;
 
     @media screen and (max-width: 650px){
-        width: 90%;
+        width: 95%;
         height: 400px;
     }
 `
@@ -524,7 +526,6 @@ const Contents = styled.div`
     color: white;
     display: flex;
     flex-direction: column;
-    /* background-color: green; */
     height: auto;
     min-height: 100px;
 `

@@ -2,6 +2,7 @@ import React,{useState, useEffect} from 'react';
 import Birthday from './Components/Birthday';
 import Loader from './Components/Loader/Loader';
 import Admin from './Components/Admin';
+import 'antd/dist/antd.css';
 import GlobalStyle from './globalStyle';
 import {BrowserRouter as Router, Routes, Route} from 'react-router-dom'
 
