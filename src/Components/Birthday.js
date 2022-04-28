@@ -1,6 +1,6 @@
 import React,{useState, useEffect} from 'react';
 import styled from 'styled-components';
-import { addDoc, collection, Timestamp, query, orderBy, onSnapshot, getDocs} from 'firebase/firestore';
+import { addDoc, collection, Timestamp, query, orderBy, onSnapshot} from 'firebase/firestore';
 import {getDownloadURL, ref, uploadBytesResumable} from 'firebase/storage';
 import { storage, db } from '../Base';
 import { toast } from 'react-toastify';
@@ -11,8 +11,9 @@ import GitHubIcon from '@mui/icons-material/GitHub';
 import TwitterIcon from '@mui/icons-material/Twitter';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import FavoriteIcon from '@mui/icons-material/Favorite';
-import Ayomi from './Image/ayomi8.jpg';
+import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import TouchAppIcon from '@mui/icons-material/TouchApp';
+import Ayomi from './Image/ayomi8.jpg';
 import Back from './Image/birthday2.jpg';
 import Ayomi1 from './Image/ayomi1.jpg'
 
@@ -31,7 +32,7 @@ const Birthday = () => {
     });
     
     const [progress, setProgress] = useState(0);
-    
+
     const handleChange = (e) => {
         setFormData({...formData, [e.target.name]: e.target.value})
     };
@@ -48,7 +49,7 @@ const Birthday = () => {
         setToggle1(!toggle1)
     };
 
-    const Post = () => {
+    const Post = (e) => {
         const storageRef = ref(storage, `/images/${Date.now()}${formData.image.name}`);
     
         const uploadImage = uploadBytesResumable(storageRef, formData.image)
@@ -125,17 +126,24 @@ const Birthday = () => {
                         <TouchAppIcon/>
                         <InputHold>
                             <marquee>Send me a Special Birthday Message</marquee>
-                            <span><label>Select Your Image</label><input accept='image/*' onChange={(e)=>handleImageChange(e)} style={{width: '100px'}} type='file'/></span> 
+                            
+                            <span><label>Select Your Image</label><ArrowForwardIcon style={{marginTop:'-6px'}}/><input accept='image/*' onChange={(e)=>handleImageChange(e)} style={{width: '100px'}} type='file'/></span> 
+                         
                             <input name='name' value={formData.name}  onChange={(e)=>handleChange(e)} placeholder='Please, Input Your Name'/>
-                            <textarea name='message' value={formData.message}  onChange={(e)=>handleChange(e)} placeholder='Write me a Birthday Wish'/>
+                            <textarea   name='message' value={formData.message}  onChange={(e)=>handleChange(e)} placeholder='Write me a Birthday Wish'/>
+
                             {progress === 0 ? null : (
                                 <div style={{ width: `${progress}%`, fontSize:'14px'}}>
-                                    {`Message Sending... ${progress}%`}
+                                    {`Sending Message... ${progress}%`}
                                 </div>
                             )}
+                            {/* disabled={!formData.image} */}
                             <button  onClick={()=>{
                                 Post();
-                            }}>Send Message</button>
+                            }}>
+                                Send Message
+                            </button>
+
                         </InputHold>
 
                         {toggle1 ? (
@@ -145,10 +153,9 @@ const Birthday = () => {
                         <CardHolder>
                            {wish.map((props) => (
                                 <Cards key={props.id}>
-                                    <Avatar src={props.image}/>
+                                    <Avatar src={props.image} alt={props.name.charAt(0)}/>
                                     <Contents>
-                                        
-                                        <MessageName style={{textAlign:'left', marginBottom:'-5px', marginLeft:'-1px'}}>{props.name} <p style={{marginBottom:'-3px',textAlign:'left', fontSize:'13px',  textTransform:"capitalize"}}> {moment(props.createdAt.toDate()).fromNow()}</p></MessageName>
+                                        <MessageName style={{textAlign:'left', marginBottom:'-8px', marginLeft:'-1px'}}>{props.name} <p style={{marginBottom:'-3px',textAlign:'left', fontSize:'13px',  textTransform:"capitalize"}}> {moment(props.createdAt.toDate()).fromNow()}</p></MessageName>
                                         <p style={{textAlign:'left', fontSize:'14px', fontWeight: 'lighter'}}>{props.message}</p>
                                     </Contents>
                                     <p style={{width:'15px'}}><FavoriteIcon/></p>
@@ -172,21 +179,42 @@ const Birthday = () => {
                     <>
                         <button onClick={Switch}>Send me a Wish</button>
                         <InputHold>
-                            SUPPORT MY DREAM
-                            <p>My Dream is to become a proficient software engineer</p>
+                            <Type>SUPPORT MY DREAM</Type>
+                            <Line style={{marginTop:'-2px'}}></Line>
+                            My Dream is to become a proficient software engineer
                         </InputHold>
                     </>
                 )
                 }
 
                 <Connect>
-                    <h3 style={{color:'white'}}>Connect with</h3>
+                    <h3 style={{color:'white', marginBottom:'-1px', padding:'5px'}}>Connect with</h3>
+
                     <span>
-                    <FacebookIcon />
-                    <WhatsAppIcon />
-                    <GitHubIcon />
-                    <LinkedInIcon />
-                    <TwitterIcon />
+                        <a href='https://web.facebook.com/luciana.chidera' target='_blank'>
+                            <FacebookIcon />
+                        </a>
+
+                        <a
+                            href="https://wa.me/2348121759954"
+                            className="whatsapp_float"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                        >
+                            <WhatsAppIcon />
+                        </a>
+                        
+                        <a href='https://github.com/Anozieluciana' target='_blank'>
+                            <GitHubIcon />
+                        </a>
+
+                        <a href='#' target='_blank'>
+                            <LinkedInIcon />
+                        </a>
+
+                        <a href='#' target='_blank'>
+                            <TwitterIcon />
+                        </a>
                     </span>
                 </Connect>
               
@@ -255,17 +283,25 @@ const Avat = styled.img`
     object-fit: cover;
     object-position: center;
     margin-top: 15px;
+    margin-bottom:3px;
 
     :hover{
         width: 160px; 
         height: 160px;
-        margin-top: 30px;
+        margin-top: 50px;
         transition: all 0.9s ease-in-out;
     }
 
     @media screen and (max-width: 650px){
         width: 150px;
         height: 150px;
+
+        :hover{
+        width: 150px; 
+        height: 150px;
+        margin-top: 15px;
+        transition: none;
+    }
     }
 
 `
@@ -275,7 +311,7 @@ const Name = styled.div`
     font-weight: bold;
     color: white;
     background-color: #252559;
-    width: 180px;
+    width: 190px;
     text-align: center;
     border-radius: 4px;
 
@@ -285,7 +321,7 @@ const Name = styled.div`
 `
 
 const BirthDate = styled.div`
-    width: 130px;
+    width: 140px;
     text-align: center;
     color: white;
     background-color: #252559;
@@ -318,7 +354,7 @@ const DownHold = styled.div`
 
 
             :hover{
-                color: blue;
+                color: #DF4C67;
                 background-color: lightgray;
             }
     };
@@ -349,16 +385,23 @@ const InputHold = styled.div`
     label{
         font-weight: bold;
         margin-right: 5px;
+        height: 35px;
+    }
+
+    span{
+        display: flex;
+        align-items: center;
+        height: 50px;
     }
 
     input{
-        height: 30px;
+        height: 40px;
         margin-top: 8px;
         outline: none;
         border-radius: 5px;
-        /* font-weight: bold; */
         font-size: 16px;
         width: 90%;
+        color: black;
     }
 
     textarea{
@@ -376,6 +419,27 @@ const InputHold = styled.div`
     @media screen and (max-width: 650px){
         width: 90%;
     }
+    @media screen and (max-width: 330px){
+        label{
+            height: 30px;
+            font-size: 14px;
+        }
+    }
+`
+const Type = styled.div`
+	font-weight: bold;
+	width: 195px;
+	animation: typing 5s steps(30, end), blink-caret 0.80s step-end infinite;
+	animation-iteration-count: infinite;
+	white-space: nowrap;
+	overflow: hidden;
+	border-right: 2px solid;
+
+    @keyframes typing {
+			from {
+				width: 0;
+			}
+		}
 `
 const CardHolder = styled.div`
     display: flex;
@@ -432,14 +496,21 @@ const Connect= styled.div`
         width: 100%;
         display: flex;
         justify-content: space-around;
-    }
 
+        a{
+            text-decoration: none;
+            color: inherit;
+            cursor: pointer;
+        }
+    }
 `
 const Avatar = styled.img`
     width: 22%;
     height: 100px;
-    background-color: white;
+    background-color: blue;
     border-radius: 15px;
+    border: 1px solid white;
+    font-size: 40px;
 
     @media screen and (max-width: 650px){
         height: 80px;
@@ -473,4 +544,8 @@ const MessageName = styled.p`
     @media screen and (max-width: 375px){
         font-size: 13.5px;
     }
+`
+const Line = styled.div`
+    width: 90px;
+    border: 1px solid white;
 `

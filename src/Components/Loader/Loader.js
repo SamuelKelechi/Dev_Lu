@@ -53,14 +53,15 @@ const Contain = styled.div`
     }
 `
 const Hero = styled.div`
-    height: 450px;
-    /* margin-top: 20px; */
+    height: 460px;
     width: 90%;
     background: url(${Ayomi});
     background-position: center;
     background-size: cover;
-    /* background-repeat: no-repeat; */
     border-radius: 0 0 20px 20px;
+    border-right: 1px solid white;
+    border-bottom: 1px solid white;
+    border-left: 1px solid white;
 
     @media screen and (max-width: 650px){  
         height: 300px;

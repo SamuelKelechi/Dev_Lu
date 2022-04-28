@@ -1,5 +1,4 @@
 import React,{useState, useEffect} from 'react';
-import 'antd/dist/antd.css';
 import Birthday from './Components/Birthday';
 import Loader from './Components/Loader/Loader';
 import Admin from './Components/Admin';
@@ -12,7 +11,7 @@ function App () {
   useEffect(() => {
     setTimeout(() => {
       setDone(true)
-    }, 4000);
+    }, 5000);
   }, [])
   return(
     <>
@@ -25,11 +24,8 @@ function App () {
         <Route path='/adminlulu' element={<Admin />} />
       </Routes>
     }
-    
      </Router>
     </>
   )
 }
 export default App
-
-
