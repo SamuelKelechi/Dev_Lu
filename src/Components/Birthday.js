@@ -234,7 +234,7 @@ const MainContainer = styled.div`
     width: 100%;
     height: auto;
     min-height: 100vh;
-    background: linear-gradient(to right top, #4A4296, #252559);
+    background: linear-gradient(to right top, #202C33, #252959);
     display: flex;
     justify-content: center;
 `
