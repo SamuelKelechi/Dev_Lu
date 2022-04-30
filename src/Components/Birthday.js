@@ -13,11 +13,8 @@ import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import TouchAppIcon from '@mui/icons-material/TouchApp';
-import Back from './Image/birthday2.jpg';
-import Ayomi1 from './Image/ayomi1.jpg'
+import Ayomi1 from './Image/ayomi1.jpg';
 import Flip from './Slide/Flip';
-
-
 
 
 const Birthday = () => {
@@ -138,8 +135,8 @@ const Birthday = () => {
                                     {`Sending Message... ${progress}%`}
                                 </div>
                             )}
-                            {/* disabled={!formData.image} */}
-                            <button  onClick={()=>{
+                            
+                            <button disabled={!formData.message} onClick={()=>{
                                 Post();
                             }}>
                                 Send Message
@@ -183,7 +180,18 @@ const Birthday = () => {
                         <InputHold>
                             <Type>SUPPORT MY DREAM</Type>
                             <Line style={{marginTop:'-2px'}}></Line>
-                            My Dream is to become a proficient software engineer
+                            My Dream is to become a proficient software engineer. Currently I am on the path to become 
+                            a full stack developer through the CodeLab scholarship program i am undergoing. In order to 
+                            achieve my dream, i will be writing three professional exams which will certify me as a software
+                            engineer. I'm Currently fund raising 200,000 (Two Hundred Thousand Naira), to achieve my Dream, 
+                            and i am calling for everyones support. Gift me your support for my Birthday and allow me be accountable to you.
+                            God Bless You as you support me to achieve my dream. Below is my account details. Thanks in Anticipation.
+                            <Line style={{marginTop:'-2px'}}></Line>                                                                                                                                                                                                                                                                                                                                                                             
+                            <Account>
+                                <h2 style={{color:'white'}}>Bank: UBA</h2>
+                                <h3 style={{color:'white'}}>Acct. Name: Anozie Silverline Chidera</h3>
+                                <h3 style={{color:'white'}}>Acct. Number: 2133598584</h3>
+                            </Account>
                         </InputHold>
                     </>
                 )
@@ -284,7 +292,7 @@ const Avat = styled.img`
     border: 3px solid white;
     background-color: whitesmoke;
     object-fit: cover;
-    object-position: center;
+    object-position: top;
     margin-top: 15px;
     margin-bottom:3px;
 
@@ -410,10 +418,10 @@ const InputHold = styled.div`
     textarea{
         margin-top: 8px;
         margin-bottom: 8px;
-        height: 60px;
+        height: 80px;
         outline: none;
         border-radius: 5px;
-        padding-top: 20px;
+        padding-top: 10px;
         font-size: 20px;
         width: 90%;
         color: black;
@@ -465,7 +473,7 @@ const FlipHolder = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: red;
+    padding-right: 15px;
 
     @media screen and (max-width: 650px){
         width: 95%;
@@ -494,6 +502,10 @@ const Connect= styled.div`
     align-items: center;
     color: white;
 
+    h3{
+        font-size: 18px;
+    }
+
     span{
         width: 100%;
         display: flex;
@@ -518,6 +530,15 @@ const Avatar = styled.img`
         height: 80px;
         width: 20%;
         border-radius: 8px;
+    }
+`
+const Account = styled.div`
+    color: white;
+    h2{   
+        color: white;
+    }
+    h3{
+        color: white,
     }
 `
 
