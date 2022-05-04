@@ -521,10 +521,12 @@ const Connect= styled.div`
 const Avatar = styled.img`
     width: 22%;
     height: 100px;
-    background-color: blue;
+    /* background-color: blue; */
     border-radius: 15px;
     border: 1px solid white;
     font-size: 40px;
+    object-fit: cover;
+    object-position: top;
 
     @media screen and (max-width: 650px){
         height: 80px;

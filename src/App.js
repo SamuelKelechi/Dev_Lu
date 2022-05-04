@@ -22,7 +22,7 @@ function App () {
       !done ? <Loader /> :  
       <Routes>
         <Route path='/' element={<Birthday />} />
-        <Route path='/adminlulu' element={<Admin />} />
+        <Route path='/adminlu' element={<Admin />} />
       </Routes>
     }
      </Router>
